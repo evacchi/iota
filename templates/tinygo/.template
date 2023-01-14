@@ -1,5 +1,5 @@
 name: '@nanobus/tinygo'
-description: TinyGo I/Ota module project
+description: TinyGo Iota module project
 variables:
 
 - name: module
