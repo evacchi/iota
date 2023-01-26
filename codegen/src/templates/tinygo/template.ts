@@ -2,12 +2,17 @@
 import {
   FSStructure,
   Template,
-} from "/Users/pkedy/go/src/github.com/apexlang/apex/src/config.ts";
+} from "https://deno.land/x/apex_cli@v0.0.15/src/config.ts";
+
+const importUrl = new URL(".", import.meta.url);
+function urlify(relpath: string): string {
+  return new URL(relpath, importUrl).toString();
+}
 
 const template: Template = {
   info: {
     name: "@iota/tinygo",
-    description: "TinyGo Iota",
+    description: "Iota TinyGo module project",
     variables: [
       {
         name: "module",
@@ -29,6 +34,9 @@ const template: Template = {
 
   async process(_vars): Promise<FSStructure> {
     return {
+      variables: {
+        plugin: urlify("../../tinygo/plugin.ts"),
+      },
       files: [
         ".vscode/extensions.json",
         ".vscode/settings.json",
