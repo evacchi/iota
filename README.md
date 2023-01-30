@@ -39,9 +39,15 @@ The component model specification is not yet ratified. Once it is, an iota imple
 
 `codegen/` houses [`apex`](https://apexlang.io) code generators that automatically generate `Go`, `TinyGo`, and `Rust` boilerplate for iotas.
 
-**[Apex project templates](templates/)**
+**[Apex project templates](codegen/src/templates/)**
 
 `templates/` houses `apex` project templates you can use to automatically kickstart new projects.
+
+Install
+
+```cli
+apex install https://deno.land/x/iota_codegen/templates.ts
+```
 
 **[Docs](docs/)**
 
