@@ -1,0 +1,22 @@
+name: Test go
+
+on:
+  pull_request:
+    paths:
+      - codegen/**
+      - go/**
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: extractions/setup-just@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run codegen tests
+        run: just go/test

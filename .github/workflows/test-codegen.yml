@@ -1,26 +1,19 @@
-name: Build codegen
+name: Test codegen
 
 on:
-  push:
-    branches:
-      - main
-      - release-*
-    tags:
-      - v*
   pull_request:
+    paths:
+      - codegen/**
+      - rust/**
+      - go/**
     branches:
       - main
-      - release-*
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org/
 
       - uses: denoland/setup-deno@v1
         with:
@@ -44,14 +37,3 @@ jobs:
       - name: Generator diff test
         run: ./diffcheck.sh
         working-directory: ./codegen/testdata
-
-      # - name: Is Release?
-      #   if: startswith(github.ref, 'refs/tags/v')
-      #   run: echo "DEPLOY_PACKAGE=true" >> $GITHUB_ENV
-
-      # - name: Publish to npm
-      #   if: env.DEPLOY_PACKAGE == 'true'
-      #   run: npm pack && npm publish --access public
-      #   working-directory: ./codegen
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
