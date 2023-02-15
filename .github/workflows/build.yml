@@ -33,22 +33,12 @@ jobs:
       - name: Install Apex CLI
         run: deno install -A --unstable -f -n apex https://deno.land/x/apex_cli/apex.ts
 
-      # - run: npm install
-      #   working-directory: ./codegen
-
-      # - run: npm run test
-      #   working-directory: ./codegen
-
-      # #- run: npm run lint
-      # - run: npm run build
-      #   working-directory: ./codegen
-
-      # - name: Install codegen module
-      #   run: apex install file:.
-      #   working-directory: ./codegen
+      - name: Run codegen tests
+        run: apex test
+        working-directory: ./codegen
 
       - name: Bundle module and dependencies
-        run: deno bundle src/mod.ts bundle.js
+        run: apex build
         working-directory: ./codegen
 
       - name: Generator diff test
