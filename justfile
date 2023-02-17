@@ -2,7 +2,7 @@
 test:
   just go/test
   just rust/test
-  just codegen/test
+  cd codegen && apex test && cd testdata && ./diffcheck.sh
 
 codegen:
   just codegen/build
